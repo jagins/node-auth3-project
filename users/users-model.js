@@ -20,7 +20,7 @@ function findUserById(id)
 }
 function findAllUsers()
 {
-
+    return database('users');
 }
 
 module.exports = {
