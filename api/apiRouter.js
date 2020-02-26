@@ -1,10 +1,18 @@
 const express = require('express');
+const userRouter = require('../users/userRouter');
 
 const router = express.Router();
 
-router.get('/register', (req, res) =>
+router.use('/users', userRouter);
+
+router.post('/register', (req, res) =>
 {
-    res.json({message: 'hello from register'});
+   
+})
+
+router.post('/login', (req, res) =>
+{
+
 })
 
 module.exports = router;
