@@ -4,8 +4,9 @@ module.exports = {
 
   development: {
     client: 'sqlite3',
+    useNullAsDefault: true,
     connection: {
-      filename: './data/users.db3'
+      filename: './data/users.db3',
     },
     pool: {
       afterCreate: (conn, done) => {
@@ -17,8 +18,8 @@ module.exports = {
     },
     seeds: {
       directory: './data/seeds',
+    },
   },
-
   staging: {
     client: 'postgresql',
     connection: {
