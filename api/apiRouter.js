@@ -3,6 +3,7 @@ const userRouter = require('../users/userRouter');
 const bcrypt = require('bcryptjs');
 const {verifyRegistration} = require('../utils/verifyRegistration');
 const Users = require('../users/users-model');
+const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
@@ -27,7 +28,39 @@ router.post('/register', verifyRegistration, (req, res) =>
 
 router.post('/login', (req, res) =>
 {
+    const {username, password} = req.body;
 
+    Users.findUser({username}).first()
+    .then(user =>
+    {
+        if(user && bcrypt.compareSync(password, user.password))
+        {
+            const token = createToken(user);
+
+            res.status(200).json({subject: user.id, token});
+        }
+        else
+        {
+            res.status(401).json({error: "Invalid username or password"});
+        }
+    })
+    .catch(error =>
+    {
+        res.status(500).json({error: 'There was an error logging in'});
+    })
 })
+
+function createToken(user)
+{
+    const payload = {
+        username: user.username
+    };
+
+    const options = {
+        expiresIn: '1hr'
+    };
+
+    return jwt.sign(payload, process.env.JWT_SECRET, options);
+}
 
 module.exports = router;

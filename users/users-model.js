@@ -9,11 +9,15 @@ function addUser(user)
         return findUser(id)
     })
 }
-function findUser(id)
+function findUser(user)
+{
+    return database('users').where(user).first();
+}
+
+function findUserById(id)
 {
     return database('users').where({id}).first();
 }
-
 function findAllUsers()
 {
 
@@ -22,5 +26,6 @@ function findAllUsers()
 module.exports = {
     addUser,
     findUser,
+    findUserById,
     findAllUsers
 }
