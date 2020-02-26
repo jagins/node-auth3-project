@@ -6,7 +6,7 @@ function addUser(user)
     .then(ids =>
     {
         const [id] = ids;
-        return findUser(id)
+        return findUserById(id)
     })
 }
 function findUser(user)
