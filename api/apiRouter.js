@@ -1,13 +1,14 @@
 const express = require('express');
 const userRouter = require('../users/userRouter');
 const bcrypt = require('bcryptjs');
-const {verifyRegistration} = require('../utils/verifyRegistration');
+const verifyRegistration = require('../utils/verifyRegistration');
 const Users = require('../users/users-model');
 const jwt = require('jsonwebtoken');
+const privateRoute = require('../utils/privateRoute');
 
 const router = express.Router();
 
-router.use('/users', userRouter);
+router.use('/users', privateRoute, userRouter);
 
 router.post('/register', verifyRegistration, (req, res) =>
 {

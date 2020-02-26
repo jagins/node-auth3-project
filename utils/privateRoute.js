@@ -24,3 +24,5 @@ function privateRoute(req, res, next)
         res.status(400).json({error: 'Please provide a valid token'});
     }
 }
+
+module.exports = privateRoute;

@@ -12,6 +12,4 @@ function verifyRegistration(req, res, next)
     }
 }
 
-module.exports = {
-    verifyRegistration
-}
+module.exports = verifyRegistration;
